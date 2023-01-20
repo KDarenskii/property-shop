@@ -1,0 +1,94 @@
+@import '../../styles/vars.scss';
+
+.panels-filter {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: $grey;
+    font-weight: 500;
+    // .panels-filter__element
+    &__element {
+        flex-shrink: 0;
+        padding: 10px 0;
+        text-align: center;
+        &:nth-child(1) {
+            max-width: 120px;
+            width: 100%;
+        }
+        &:nth-child(2) {
+            max-width: 160px;
+            width: 100%;
+        }
+        &:nth-child(3) {
+            max-width: 70px;
+            width: 100%;
+        }
+        &:nth-child(4) {
+            max-width: 70px;
+            width: 100%;
+        }
+        &:nth-child(5) {
+            max-width: 70px;
+            width: 100%;
+        }
+        &:nth-child(6) {
+            max-width: 80px;
+            width: 100%;
+        }
+        &:nth-child(7) {
+            max-width: 100px;
+            width: 100%;
+        }
+        &:nth-child(8) {
+            max-width: 100px;
+            width: 100%;
+        }
+        &:nth-child(9) {
+            max-width: 100px;
+            width: 100%;
+        }
+    }
+    // .panels-filter__name
+    &__name {
+        display: inline-block;
+        position: relative;
+        padding-right: 20px;
+        font-size: 12px;
+        line-height: 1;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+            color: $red;
+        }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 5px;
+            background-image: url("../../../public/img/icons/down-arrow.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        &--asc::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        &--no-hover{
+            padding: 0;
+            &::after {
+                display: none;
+            }
+            &:hover{
+                color: #959595;
+                cursor: default;
+                opacity: 1;
+            }
+        }
+    }
+}

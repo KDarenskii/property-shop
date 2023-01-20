@@ -1,0 +1,12 @@
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    // .sort__label
+    &__label {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}

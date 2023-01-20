@@ -1,0 +1,41 @@
+@import '../../styles/vars.scss';
+
+.table-bid {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 0.35em;
+    transition: background-color 0.1s ease-in;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(238, 229, 229);
+    }
+    @media (max-width: $tablet) {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: 0.625em;
+    }
+    // .table-bid__td
+    &__td {
+        padding: 0.625em 0.2em;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media (max-width: $tablet) {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: 0.8em;
+            text-align: right;
+            &::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,40 @@
+@import '../../styles/vars';
+
+.header {
+    background-color: $black;
+    color: $white;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 15px 0;
+    // .header__wrapper
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        height: 100%;
+        margin: 0 auto;
+    }
+    // .header__logo-text 
+    &__logo-text {
+        @media (max-width: $tablet) {
+            display: none;
+        }
+    }
+    // .header__link
+    &__link {
+        color: $white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        &:hover {
+            color: $yellow;
+        }
+        @media (max-width: $mobileMiddle) {
+            font-size: 19px;
+            width: 100%;
+        }
+    }
+}

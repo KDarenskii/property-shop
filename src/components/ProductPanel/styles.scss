@@ -1,0 +1,62 @@
+@import '../../styles/vars.scss';
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 73px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    box-shadow: 4px 7px 35px rgba(198, 211, 214, 0.3);
+    border-radius: 8px;
+    background-color: $white;
+    text-align: center;
+    color: $black;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-3px);
+        box-shadow: 4px 7px 35px #c6d3d6;
+    }
+    // .panel__artikul
+    &__artikul {
+        width: 120px;
+    }
+    // .panel__name
+    &__name {
+        width: 160px;
+    }
+    // .panel__block
+    &__block {
+        width: 70px;
+    }
+    // .panel__floor
+    &__floor {
+        width: 70px;
+    }
+    // .panel__rooms
+    &__rooms {
+        width: 70px;
+    }
+    // .panel__sq
+    &__sq {
+        width: 80px;
+    }
+    // .panel__price-per-m
+    &__price-per-m {
+        width: 100px;
+    }
+    // .panel__price
+    &__price {
+        color: #dc0909;
+        width: 100px;
+    }
+    // .panel__favourite
+    &__favourite {
+        width: 100px;
+    }
+}

@@ -1,0 +1,35 @@
+@import '../../../styles/vars.scss';
+
+.bids-table-header {
+    @media (max-width: $tablet) {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    // .bids-table-header__row
+    &__row {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: 0.35em;
+        @media (max-width: $tablet) {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: 0.625em;
+        }
+    }
+    // .bids-table-header__th
+    &__th {
+        padding: 0.625em 0.2em;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.85em;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+}

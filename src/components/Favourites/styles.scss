@@ -1,0 +1,12 @@
+@import '../../styles/vars.scss';
+
+.favourites {
+    margin-bottom: 40px;
+    // .favourites__title
+    &__title {
+        margin-bottom: 20px;
+        @media (max-width: $pc) {
+            text-align: center;
+        } 
+    }
+}

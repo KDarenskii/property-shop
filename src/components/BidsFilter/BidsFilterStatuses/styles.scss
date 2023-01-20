@@ -1,0 +1,33 @@
+@import '../../../styles/vars.scss';
+
+.bids-filter-statuses {
+    display: flex;
+    align-items: center;
+    @media (max-width: $mobileMiddle) {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    // .bids-filter-statuses__btn
+    &__btn {
+        display: block;
+        padding: 10px;
+        font-size: 16px;
+        color: #212529;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+        @media (max-width: $mobileMiddle) {
+            width: 100%;
+        }
+        &:hover {
+            color: #212529;
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+        }
+        &--active {
+            color: #212529;
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+@import '../../styles/vars.scss';
+
+.auth-link {
+    color: $white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &:hover {
+        color: $yellow;
+    }
+}

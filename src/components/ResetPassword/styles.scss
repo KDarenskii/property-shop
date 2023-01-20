@@ -1,0 +1,33 @@
+.reset-password {
+    // .reset-password__title
+    &__title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    // .reset-password__input
+    &__input {
+        font-size: 18px;
+        margin-bottom: 15px;
+        width: 100%;
+        height: 45px;
+    }
+    // .reset-password__btn
+    &__btn {
+        margin: 0 auto 15px;
+    }
+    // .reset-password__text
+    &__text {
+        font-size: 14px;
+        &:not(:last-child) {
+            margin-bottom: 4px;
+        }
+    }
+    // .reset-password__link
+    &__link {
+        color: rgb(62, 62, 235);
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

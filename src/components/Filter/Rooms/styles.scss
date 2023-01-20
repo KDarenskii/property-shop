@@ -1,0 +1,39 @@
+@import '../../../styles/vars.scss';
+
+.rooms {
+    // .rooms__label
+    &__label {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    // .rooms__wrapper
+    &__wrapper {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    // .rooms__btn
+    &__btn {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        background-color: #e6e6e6;
+        color: $black;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
+        &--active {
+            background-color: $red;
+            color: $white;
+        }
+        @media (max-width: $mobileMiddle) {
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+        }
+    }
+}

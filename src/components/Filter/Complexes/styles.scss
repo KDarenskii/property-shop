@@ -1,0 +1,15 @@
+@import '../../../styles/vars.scss';
+
+.complexes {
+    // .complexes__label
+    &__label {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    // .complexes__select
+    &__select {
+        @media (max-width: $mobileSmall) {
+            width: 100%;
+        }
+    }
+}

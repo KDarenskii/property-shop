@@ -1,0 +1,14 @@
+@import '../../styles/vars.scss';
+
+.bids-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0 0 30px;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    @media (max-width: $tablet) {
+        border: 0;
+    }
+}
+

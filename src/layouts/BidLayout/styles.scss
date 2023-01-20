@@ -1,0 +1,38 @@
+@import '../../styles/vars.scss';
+
+.bid {
+    margin-bottom: 40px;
+    // .bid__body
+    &__body {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #dcd2d2;
+    }
+    // .bid__header
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-bottom: 1px solid #dcd2d2;
+        background-color: rgb(245, 242, 242);
+        @media (max-width: $mobileSmall) {
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+    }
+    // .bid__title
+    &__title {
+        font-size: 16px;
+        @media (max-width: $mobileSmall) {
+            margin-top: 5px;
+        }
+    }
+    // .bid__link
+    &__link {
+        color: $blue;
+        @media (max-width: $mobileSmall) {
+            align-self: flex-end;
+        }
+    }
+}

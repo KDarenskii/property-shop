@@ -1,0 +1,27 @@
+@import '../../../styles/vars.scss';
+
+.filter-reset-btn {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+    padding: 0 30px;
+    color: #b8b8b8;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    transition: 0.1s color ease-in;
+    &:hover {
+        color: $black;
+        cursor: pointer;
+        .filter-reset-btn__img {
+            opacity: 1;
+        }
+    }
+    // .filter-reset-btn__img
+    &__img {
+        opacity: 0.2;
+        transition: 0.1s opacity ease-in;
+    }
+}

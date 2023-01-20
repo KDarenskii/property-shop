@@ -1,0 +1,27 @@
+@import '../../../styles/vars.scss';
+
+.view-buttons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+    @media (max-width: $pc) {
+        display: none;
+    }
+    // .view-buttons__label
+    &__label {
+        color: #cfcfcf;
+        font-size: 20px;
+        transition: 0.4s color ease;
+        cursor: pointer;
+        &:hover {
+            color: $grey;
+        }
+        &--active {
+            color: $black;
+            &:hover {
+                color: $black;
+            }
+        }
+    }
+}

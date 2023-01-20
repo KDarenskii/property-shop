@@ -1,0 +1,20 @@
+@import '../../styles/vars.scss';
+
+.viewing {
+    padding: 40px 30px;
+    @media (max-width: $tablet) {
+        padding: 40px 0 0;
+    }
+    @media (max-width: $mobile) {
+        padding: 0;
+    }
+    // .viewing__title
+    &__title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 27px;
+        @media (max-width: $mobile) {
+            font-size: 24px;
+        }
+    }
+}

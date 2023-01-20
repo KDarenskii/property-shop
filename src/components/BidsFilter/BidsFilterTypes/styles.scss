@@ -1,0 +1,8 @@
+@import '../../../styles/vars.scss';
+
+.bids-filter-select {
+    width: 40%;
+    @media (max-width: $mobileMiddle) {
+        width: 100%;
+    }
+}
