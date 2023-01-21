@@ -1,21 +1,17 @@
+@import '../../styles/vars.scss';
+
 .bids {
     margin-bottom: 40px;
+    // .bids__title
+    &__title {
+        margin-bottom: 20px;
+        @media (max-width: $pc) {
+            text-align: center;
+        } 
+    }
     // .bids__content
     &__content {
         background-color: #ffffff;
         padding: 25px 40px;
     }
-}
-.bids-status {
-    padding: 3px 7px;
-    background-color: #ff6666;
-    border-radius: 8px;
-    font-size: 14px;
-    text-align: center;
-}
-.bids-status--inwork {
-    background-color: #e6e600;
-}
-.bids-status--completed {
-    background-color: #18e618;
 }

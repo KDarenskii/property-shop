@@ -7,6 +7,8 @@ import { auth } from "../../firebase";
 import { AuthError, sendPasswordResetEmail } from "firebase/auth";
 
 import './styles.scss';
+import TextInput from "../FormElements/TextInput";
+import OrderButton from "../Buttons/OrderButton";
 
 const ResetPassword: React.FC = () => {
 
@@ -50,21 +52,21 @@ const ResetPassword: React.FC = () => {
                     onSubmit={handleLogin}
                     onChange={() => setError(null)}
                 >
-                    <input
+                    <TextInput
                         type="email"
                         placeholder="Email"
-                        className="reset-password__input input control"
+                        className="reset-password__input"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                         disabled={isSubmiting}
                     />
-                    <button
-                        className="reset-password__btn button-order button-order--small"
-                        type="submit"
-                        disabled={isSubmiting}
-                    >
-                        Сбросить
-                    </button>
+                <OrderButton 
+                    className={'reset-password__btn'} 
+                    type={'submit'} 
+                    text={'Сбросить'} 
+                    disabled={isSubmiting} 
+                    size={'small'}
+                />
                 </form>
             )}
             <p className="reset-password__text">

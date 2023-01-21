@@ -1,12 +1,13 @@
 import React from "react";
 import { HOME_ROUTE } from "../../constants/routesPathNames";
-import { Link } from "react-router-dom";
 import { BookingResult } from "../Booking";
 import { HTTP_STATUS } from "../../constants/httpStatuses";
+import ActionButton from "../Buttons/ActionButton";
 
 import "./styles.scss";
 
 const FormsResult: React.FC<BookingResult> = ({ status, message }) => {
+
     const isSuccess = status === HTTP_STATUS.RESOLVED;
 
     return (
@@ -25,9 +26,7 @@ const FormsResult: React.FC<BookingResult> = ({ status, message }) => {
                         <p className="forms-result__text">Попробуйте снова через некоторое время.</p>
                     </>
                 )}
-                <Link to={HOME_ROUTE} className="forms-result__btn button-order button-order--small">
-                    На главную
-                </Link>
+                <ActionButton to={HOME_ROUTE} text={'На главную'} color={'blue'} className={'forms-result__btn'} />
             </div>
         </section>
     );

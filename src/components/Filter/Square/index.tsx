@@ -1,10 +1,10 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
-import { NumericFormat } from 'react-number-format';
+import formatNumber from "../../../utils/formatNumber";
+import NumericInput from "../../FormElements/NumericInput";
 
 import './styles.scss';
-import formatNumber from "../../../utils/formatNumber";
 
 type SquareProps = {
     squareMin: string;
@@ -89,9 +89,9 @@ const Square: React.FC<SquareProps> = ({squareMin, squareMax}) => {
             <div className="square__wrapper">
                 <label className="square__range">
                     <div className="square__range-text">от</div>
-                    <NumericFormat
+                    <NumericInput 
                         name="sqmin"
-                        className="square__input input control"
+                        className="square__input"
                         placeholder={formatNumber(Number(squareMin))}
                         thousandSeparator={' '}
                         decimalScale={0}
@@ -106,9 +106,9 @@ const Square: React.FC<SquareProps> = ({squareMin, squareMax}) => {
                 </label>
                 <label className="square__range">
                     <div className="square__range-text">до</div>
-                    <NumericFormat
+                    <NumericInput
                         name="sqmax"
-                        className="square__input input control"
+                        className="square__input"
                         placeholder={formatNumber(Number(squareMax))}
                         thousandSeparator={' '}
                         decimalScale={0}

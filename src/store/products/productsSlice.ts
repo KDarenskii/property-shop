@@ -8,6 +8,7 @@ type IProductsItems = {
     error: string | null;
     isLoading: boolean;
     totalCount: string;
+    limit: number;
 }
 
 type InitialState = {
@@ -30,6 +31,7 @@ const initialState: InitialState = {
         error: null,
         isLoading: true,
         totalCount: '0',
+        limit: 6
     },
     listView: JSON.parse(localStorage.getItem('listView') as string) || 'cards',
 }

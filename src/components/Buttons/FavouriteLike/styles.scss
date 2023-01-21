@@ -1,0 +1,21 @@
+@import '../../../styles/vars.scss';
+
+.favourite-like {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ececec;
+    transition: color 0.2s ease;
+    @media (min-width: $pc){
+        &:hover {
+            color: $red;
+        }
+    }
+    &--active {
+        color: $red;
+        @media (min-width: $pc){
+            &:hover {
+                color: #ec6767;
+            }
+        }
+    }
+}

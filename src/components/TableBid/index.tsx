@@ -4,12 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useParseISO } from "../../hooks/useParseISO";
 
 import './styles.scss';
-
-const bageStatuses = {
-    'Новая': 'new',
-    'В работе': 'inwork',
-    'Завершенная': 'completed'
-}
+import Badge from "../Badge";
+import { BadgeTypes } from "../../constants/badgeTypes";
 
 const TableBid: React.FC<IBookingBid | IBid> = (bid) => {
 
@@ -24,7 +20,7 @@ const TableBid: React.FC<IBookingBid | IBid> = (bid) => {
             <td className="table-bid__td" data-label="Email">{bid.email}</td>
             <td className="table-bid__td" data-label="Телефон">{bid.phone}</td>
             <td className="table-bid__td" data-label="Статус">
-                <span className={`bids-status bids-status--${bageStatuses[bid.status]}`}>{bid.status}</span>
+                <Badge type={BadgeTypes[bid.status]} text={bid.status} />
             </td>
         </tr>
     );

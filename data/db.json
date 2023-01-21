@@ -388,6 +388,30 @@
       "type": "Просмотр",
       "date": "2023-01-18T23:48:31.763Z",
       "id": 11
+    },
+    {
+      "firstName": "kfmgkdfmk",
+      "lastName": "fsdkmfksdfm",
+      "birthdate": "1313-12-13",
+      "phone": "34534543",
+      "email": "fsdkfsd@mail.com",
+      "comment": "kfsdmfkdsfmlskfd",
+      "status": "Завершенная",
+      "type": "Бронирование",
+      "date": "2023-01-21T15:50:11.379Z",
+      "id": 12
+    },
+    {
+      "firstName": "fsdfns",
+      "lastName": "jsfdnkfjsndk",
+      "birthdate": "1313-12-13",
+      "phone": "84353948534",
+      "email": "fksdfjksndf@mail.com",
+      "comment": "ksdmlksfd",
+      "status": "Завершенная",
+      "type": "Бронирование",
+      "date": "2023-01-21T15:59:02.069Z",
+      "id": 13
     }
   ],
   "favourites": [
@@ -435,21 +459,6 @@
       "rooms": "3",
       "flat_number": "49",
       "image": "product-1.png"
-    },
-    {
-      "id": "2",
-      "scu": "РЕЧ-05",
-      "title": "Двухкомнатная квартира",
-      "complex_name": "Речной",
-      "square": "42",
-      "price_sq_m": "64000",
-      "price_total": "2688000",
-      "building": "1",
-      "floor": "12",
-      "floors_total": "12",
-      "rooms": "2",
-      "flat_number": "52",
-      "image": "product-2.png"
     }
   ]
 }

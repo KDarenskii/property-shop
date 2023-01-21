@@ -1,0 +1,10 @@
+@import '../../styles/vars.scss';
+
+.cards-wrapper {
+    display: flex;
+    gap: 23.7px;
+    flex-wrap: wrap;
+    @media (max-width: $pc) {
+        justify-content: center;
+    }
+}

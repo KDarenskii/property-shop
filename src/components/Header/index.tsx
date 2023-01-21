@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useMenu } from "../../hooks/useMenu";
-import Menu from "../Menu";
-import MenuButton from "../Menu/MenuButton";
+import Menu from "./Menu";
+import MenuButton from "./MenuButton";
 
 import "./styles.scss";
 
 const Header: React.FC = () => {
-    
     const [isActive, toggle] = useMenu();
 
     return (

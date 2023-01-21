@@ -1,12 +1,13 @@
 import React from "react";
-import SingleProduct from "../components/SingleProduct";
+import Container from "../components/Container";
+import SingleProduct from "../components/FullProduct";
 
 const ProductPage: React.FC = () => {
     return (
         <main className="main">
-            <div className="container">
+            <Container>
                 <SingleProduct />
-            </div>
+            </Container>
         </main>
     )
 };

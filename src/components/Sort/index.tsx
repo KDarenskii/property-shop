@@ -1,9 +1,15 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import Select from "../FormElements/Select";
 
 import './styles.scss';
 
-const Sort: React.FC = () => {
+type SortProps = {
+    className?: string;
+    children: React.ReactNode;
+}
+
+const Sort: React.FC<SortProps> = ({ children, className = '' }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -21,29 +27,17 @@ const Sort: React.FC = () => {
     const initialValue = searchParams.get('_sort') ? searchParams.get('_sort') + '-' + searchParams.get('_order') : 'empty';
 
     return (
-        <div className="sort">
-            <label htmlFor="sort-cards-by" className="sort__label label">
+        <div className={`sort ${className}`}>
+            <label className="sort__label label">
                 Сортировать
+                <Select
+                    onChange={handleChange}
+                    value={initialValue}
+                    name="sortby"
+                >
+                    {children}
+                </Select>
             </label>
-            <select
-                onChange={handleChange}
-                value={initialValue}
-                id="sort-cards-by"
-                name="sortby"
-                className="sort__select select control"
-            >
-                <option value="empty">Выберите</option>
-                <option value="price_total-asc">по цене ↑</option>
-                <option value="price_total-desc">по цене ↓</option>
-                <option value="square-asc">по площади ↑</option>
-                <option value="square-desc">по площади ↓</option>
-                <option value="rooms-asc">по кол-ву комнат ↑</option>
-                <option value="rooms-desc">по кол-ву комнат ↓</option>
-                <option value="complex_name-asc">по ЖК ↑</option>
-                <option value="complex_name-desc">по ЖК ↓</option>
-                <option value="price_sq_m-asc">по ₽/м2 ↑</option>
-                <option value="price_sq_m-desc">по ₽/м2 ↓</option>
-            </select>
         </div>
     );
 };

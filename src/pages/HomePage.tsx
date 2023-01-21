@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "../components/Container";
 import Products from "../components/Products";
 
 const HomePage: React.FC = () => {
@@ -6,9 +7,9 @@ const HomePage: React.FC = () => {
     return (
         <>
             <main className="main">
-                <div className="container">
+                <Container>
                     <Products />
-                </div>
+                </Container>
             </main>
         </>
     );

@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../models/products";
 import formatNumber from "../../utils/formatNumber";
-import FavouriteLike from "../FavouriteLike";
+import FavouriteLike from "../Buttons/FavouriteLike";
 
 import "./styles.scss";
 
-const ProductCard: React.FC<IProduct> = (product) => {
+type ProductCardProps = IProduct;
 
+const ProductCard: React.FC<ProductCardProps> = (product) => {
+    
     const {
         complex_name,
         image,

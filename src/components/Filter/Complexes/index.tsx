@@ -1,5 +1,6 @@
 import React from "react";
 import { useSearchParams } from 'react-router-dom';
+import Select from "../../FormElements/Select";
 
 import './styles.scss';
 
@@ -24,18 +25,25 @@ const Complexes: React.FC<ComplexesProps> = ({ complexNames }) => {
         setSearchParams(searchParams);
     }
 
+    const options = (
+        <>
+            <option value="all">Все проекты</option>
+            {complexNames.map((complex, index) => <option key={index} value={complex}>ЖК {complex}</option>)}
+        </>
+    )
+
     return (
         <div className="complexes">
-            <div className="complexes__label label">Выбор проекта:</div>
-            <select 
-                onChange={handleChange} 
-                name="complex" 
-                value={activeComplex} 
-                className="complexes__select select control"
-            >
-                <option value="all">Все проекты</option>
-                {complexNames.map((complex, index) => <option key={index} value={complex}>ЖК {complex}</option>)}
-            </select>
+            <label className="complexes__label">
+                Выбор проекта:
+                <Select 
+                    className={'complexes__select'} 
+                    value={activeComplex} 
+                    onChange={handleChange} 
+                    name={'complex'} 
+                    children={options}
+                />
+            </label>
         </div>
     );
 };

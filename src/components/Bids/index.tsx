@@ -3,12 +3,13 @@ import BidsTable from "../BidsTable";
 import BidsFilter from "../BidsFilter";
 
 import "./styles.scss";
+import MainTitle from "../MainTitle";
 
 const Bids: React.FC = () => {
     return (
         <section className="bids">
             <div className="bids__content">
-                <h2 className="main-title main-title--mb">Все заявки</h2>
+                <MainTitle text={'Все заявки'} className={'bids__title'} />
                 <BidsFilter />
                 <BidsTable />
             </div>

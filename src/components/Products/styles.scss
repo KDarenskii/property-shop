@@ -1,7 +1,20 @@
+@import '../../styles/vars.scss';
+
 .products {
     margin-bottom: 30px;
+    // .products__title
+    &__title {
+        margin-bottom: 20px;
+        @media (max-width: $pc) {
+            text-align: center;
+        }
+    }
     // .products__list
     &__list {
         margin-bottom: 20px;
+    }
+    // .products__panel-loader
+    &__panel-loader {
+        margin-bottom: 10px;
     }
 }

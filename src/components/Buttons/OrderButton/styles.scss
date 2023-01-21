@@ -1,0 +1,33 @@
+@import '../../../styles/vars.scss';
+
+.order-button {
+    display: block;
+    height: 68px;
+    width: 100%;
+    border-radius: 32px;
+    background-color: $red;
+    text-align: center;
+    color: $white;
+    font-size: 22px;
+    font-weight: 700;
+    transition: opacity 0.1s ease-in, background-color 0.1s ease-in;
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        background-color: #ff0000;
+    }
+    &:focus {
+        opacity: 1;
+        cursor: pointer;
+        background-color: #971111;
+    }
+    &--small {
+        height: 40px;
+        font-size: 18px;
+        max-width: 200px;
+    }
+}

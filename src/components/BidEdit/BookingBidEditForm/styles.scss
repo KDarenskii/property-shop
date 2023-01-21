@@ -1,0 +1,73 @@
+@import '../../../styles/vars.scss';
+
+.bid-edit-booking-form {
+    padding: 20px;
+    background-color: #fff;
+    // .bid-edit-booking-form__item
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 13px;
+        @media (max-width: $mobileMiddle) {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    // .bid-edit-booking-form__item-name
+    &__item-name {
+        max-width: 200px;
+        width: 100%;
+        font-weight: 700;
+        @media (max-width: $mobileMiddle) {
+            font-size: 20px;
+            margin-bottom: 5px;
+            &.label {
+                font-size: 20px;
+            }
+        }
+    }
+    // .bid-edit-booking-form__item-value
+    &__item-value {
+        max-width: 100%;
+        width: 100%;
+        overflow-x: auto;
+        @media (max-width: $mobileMiddle) {
+            font-size: 20px;
+        }
+    }
+    // .bid-edit-booking-form__input-wrapper
+    &__input-wrapper {
+        width: 100%;
+    }
+    // .bid-edit-booking-form__input
+    &__input {
+        width: 100%;
+        @media (max-width: $mobileMiddle) {
+            margin-top: 5px;
+            max-width: 350px;
+        }
+    }
+    // .bid-edit-booking-form__select
+    &__select {
+        width: 100%;
+        @media (max-width: $mobileMiddle) {
+            margin-top: 5px;
+            max-width: 350px;
+        }
+    }
+    // .bid-edit-booking-form__actions
+    &__actions {
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+        padding-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        @media (max-width: $mobileMiddle) {
+            justify-content: center;
+        }
+    }
+}

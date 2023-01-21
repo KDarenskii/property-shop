@@ -1,0 +1,15 @@
+.badge {
+    padding: 3px 7px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    &--new {
+        background-color: #ff6666;
+    }
+    &--inwork {
+        background-color: #e6e600;
+    }
+    &--completed {
+        background-color: #18e618;
+    }
+}

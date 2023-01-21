@@ -1,10 +1,10 @@
 import React from "react";
 import formatNumber from "../../../utils/formatNumber";
 import { useSearchParams } from "react-router-dom";
-import { NumericFormat } from 'react-number-format';
+import { useDebouncedCallback } from "use-debounce";
+import NumericInput from "../../FormElements/NumericInput";
 
 import './styles.scss';
-import { useDebouncedCallback } from "use-debounce";
 
 type PricesProps = {
     priceMin: string;
@@ -89,7 +89,7 @@ const Prices: React.FC<PricesProps> = ({ priceMax, priceMin }) => {
             <div className="price__wrapper">
                 <div className="price__range">
                     <div className="price__range-text">от</div>
-                    <NumericFormat
+                    <NumericInput
                          className="price__input input control" 
                          type="text" 
                          placeholder={formatNumber(Number(priceMin))}
@@ -106,7 +106,7 @@ const Prices: React.FC<PricesProps> = ({ priceMax, priceMin }) => {
                 </div>
                 <div className="price__range">
                     <div className="price__range-text">до</div>
-                    <NumericFormat
+                    <NumericInput
                          className="price__input input control" 
                          type="text" 
                          placeholder={formatNumber(Number(priceMax))}

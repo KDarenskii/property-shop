@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
+import Select from '../../FormElements/Select';
 
 import './styles.scss';
 
@@ -16,16 +17,21 @@ const BidsTypes: React.FC = () => {
         setSearchParams(searchParams);
     }
 
-    return (
-        <select 
-            onChange={handleTypeChange} 
-            className="bids-filter-select select"
-            defaultValue={searchParams.has('type') ? searchParams.get('type') as string : 'Все'}
-        >
+    const options = (
+        <>
             <option value="Все">Все заявки</option>
             <option value="Бронирование">Бронирование</option>
             <option value="Просмотр">Просмотр</option>
-        </select>
+        </>
+    )
+
+    return (
+        <Select
+            onChange={handleTypeChange} 
+            className={'bids-filter-select'}
+            defaultValue={searchParams.has('type') ? searchParams.get('type') as string : 'Все'}
+            children={options}
+        />
     )
 }
 

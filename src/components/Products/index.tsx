@@ -1,31 +1,33 @@
 import React from "react";
-import Panel from "../Panel";
-import ProductsCardsList from "./ProductsCardsList";
+import Pagination from "../Pagination";
+import PanelFilter from "../PanelFilter";
+import ProductCardLoader from "../ProductCard/ProductCardLoader";
+import ProductCard from "../ProductCard";
+import PanelLoader from "../ProductPanel/PanelLoader";
+import ProductPanel from "../ProductPanel";
 import ViewOptions from "../ViewOptions";
+import Alert from "../Alert";
+import Filter from "../Filter";
+
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { selectProductsError, selectListView, selectProductsTotalCount } from "../../store/products/selectors";
+import {  selectListView, selectProducts } from "../../store/products/selectors";
 import { fetchProducts } from "../../store/products/thunks/fetchProducts";
-import Alert from "../Alert";
 import { useSearchParams } from "react-router-dom";
-import Filter from "../Filter";
 import { ALERT_TYPES } from "../../constants/alertTypes";
-import Pagination from "../Pagination";
-import { selectFavoritesIsLoading } from "../../store/favourites/selectors";
+import CardsWrapper from "../CardsWrapper";
+import MainTitle from "../MainTitle";
 
 import "./styles.scss";
 
 const Products: React.FC = () => {
 
     const listView = useAppSelector(selectListView);
-    const error = useAppSelector(selectProductsError);
-    const totalCount = useAppSelector(selectProductsTotalCount);
-    const isLoading = useAppSelector(selectFavoritesIsLoading);
+    const { list, isLoading, error, totalCount, limit } = useAppSelector(selectProducts);
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
 
-    const limit: number = 6;
     const totalPages = Math.ceil(Number(totalCount) / limit);
 
     React.useEffect(() => {
@@ -41,7 +43,7 @@ const Products: React.FC = () => {
     return (
         <>
             <div className="products">
-                <h2 className="main-title main-title--mb">Выбор квартир:</h2>
+                <MainTitle text={'Выбор квартир'} className={'products__title'} />
                 <Filter />
                 <ViewOptions />
                 <div className="products__list">
@@ -49,14 +51,29 @@ const Products: React.FC = () => {
                     {!error && (
                         <>
                             {listView === "cards" 
-                                ?<ProductsCardsList />
-                                : <Panel />
+                                ? (
+                                    <CardsWrapper>
+                                        {isLoading && [...new Array(6)].map((_, index) => <ProductCardLoader key={index} />)}
+                                        {!isLoading && list.map((product) => <ProductCard key={product.id} {...product} />)}
+                                    </CardsWrapper>
+                                )
+                                : (
+                                    <>
+                                        <PanelFilter />
+                                        {isLoading && [...new Array(4)].map((_, index) => <PanelLoader key={index} className={'products__panel-loader'} />)}
+                                        {!isLoading && list.map((product) => <ProductPanel key={product.id} {...product} />)}
+                                    </>
+                                )
                             }
                         </>
                     )}
                 </div>
-                {totalPages > 1 && !isLoading && <Pagination limit={limit} totalPages={totalPages} />}
-                {totalPages < 1 && <Alert type={ALERT_TYPES.INFO} message={ "К сожалению, подходящих товаров нет в наличии." } />}
+                {!isLoading && (
+                    <>
+                        {totalPages > 1 && <Pagination limit={limit} totalPages={totalPages} />}
+                        {totalPages < 1 && <Alert type={ALERT_TYPES.INFO} message={ "К сожалению, подходящих товаров нет в наличии." } />}
+                    </>
+                )}
             </div>
         </>
     );

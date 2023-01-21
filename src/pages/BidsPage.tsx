@@ -1,12 +1,13 @@
 import React from "react";
 import Bids from "../components/Bids";
+import Container from "../components/Container";
 
 const BidsPage: React.FC = () => {
     return (
         <main className="main">
-            <div className="container container--fluid">
+            <Container type={'fluid'}>
                 <Bids />
-            </div>
+            </Container>
         </main>
     )
 };

@@ -8,7 +8,6 @@ type RoomsProps = { rooms: string[] };
 const Rooms: React.FC<RoomsProps> = ({ rooms }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-
     const roomsQuery = searchParams.getAll('rooms');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
