@@ -1,0 +1,9 @@
+export const HOME_ROUTE = '/';
+export const PRODUCT_ROUTE = '/product/:id';
+export const FAVOURITES_ROUTE = '/favourites';
+export const BIDS_ROUTE = '/bids';
+export const BID_ROUTE = '/bid/:id';
+export const BID_EDIT_ROUTE = 'edit';
+export const LOGIN_ROUTE = '/login';
+export const SIGN_UP_ROUTE = '/signup';
+export const UNAUTHORIZED_ROUTE = '/unauthorized';
