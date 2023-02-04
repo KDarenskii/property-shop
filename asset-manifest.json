@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/property-shop/static/css/main.bd605c2c.css",
+    "main.js": "/property-shop/static/js/main.91268a07.js",
+    "Product.css": "/property-shop/static/css/Product.de66454b.chunk.css",
+    "Product.js": "/property-shop/static/js/Product.bb297472.chunk.js",
+    "Favourites.css": "/property-shop/static/css/Favourites.ea0280b9.chunk.css",
+    "Favourites.js": "/property-shop/static/js/Favourites.ad207ca2.chunk.js",
+    "Bids.css": "/property-shop/static/css/Bids.bbc78c94.chunk.css",
+    "Bids.js": "/property-shop/static/js/Bids.9e69c28a.chunk.js",
+    "Bid.css": "/property-shop/static/css/Bid.d9297460.chunk.css",
+    "Bid.js": "/property-shop/static/js/Bid.01727d1f.chunk.js",
+    "BidEdit.css": "/property-shop/static/css/BidEdit.37b85081.chunk.css",
+    "BidEdit.js": "/property-shop/static/js/BidEdit.307b995d.chunk.js",
+    "static/js/694.835b8d76.chunk.js": "/property-shop/static/js/694.835b8d76.chunk.js",
+    "static/media/error-icon.png": "/property-shop/static/media/error-icon.364b162caec281884a45.png",
+    "index.html": "/property-shop/index.html",
+    "main.bd605c2c.css.map": "/property-shop/static/css/main.bd605c2c.css.map",
+    "main.91268a07.js.map": "/property-shop/static/js/main.91268a07.js.map",
+    "Product.de66454b.chunk.css.map": "/property-shop/static/css/Product.de66454b.chunk.css.map",
+    "Product.bb297472.chunk.js.map": "/property-shop/static/js/Product.bb297472.chunk.js.map",
+    "Favourites.ea0280b9.chunk.css.map": "/property-shop/static/css/Favourites.ea0280b9.chunk.css.map",
+    "Favourites.ad207ca2.chunk.js.map": "/property-shop/static/js/Favourites.ad207ca2.chunk.js.map",
+    "Bids.bbc78c94.chunk.css.map": "/property-shop/static/css/Bids.bbc78c94.chunk.css.map",
+    "Bids.9e69c28a.chunk.js.map": "/property-shop/static/js/Bids.9e69c28a.chunk.js.map",
+    "Bid.d9297460.chunk.css.map": "/property-shop/static/css/Bid.d9297460.chunk.css.map",
+    "Bid.01727d1f.chunk.js.map": "/property-shop/static/js/Bid.01727d1f.chunk.js.map",
+    "BidEdit.37b85081.chunk.css.map": "/property-shop/static/css/BidEdit.37b85081.chunk.css.map",
+    "BidEdit.307b995d.chunk.js.map": "/property-shop/static/js/BidEdit.307b995d.chunk.js.map",
+    "694.835b8d76.chunk.js.map": "/property-shop/static/js/694.835b8d76.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd605c2c.css",
+    "static/js/main.91268a07.js"
+  ]
+}
