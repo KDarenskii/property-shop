@@ -42,9 +42,7 @@ const Login: React.FC = () => {
         }
 
         try {
-            const response = await dispatch(
-                loginUser({ email, password })
-            ).unwrap();
+            const response = await dispatch(loginUser({ email, password })).unwrap();
             dispatch(setUser(response.user));
             localStorage.setItem("token", response.accessToken);
             dispatch(fetchFavourites());
@@ -62,11 +60,7 @@ const Login: React.FC = () => {
         <div className="login">
             <h3 className="login__title">Вход</h3>
             {error && <Alert type={ALERT.ERROR} message={error} />}
-            <form
-                className="login__form"
-                onSubmit={handleLogin}
-                onChange={() => setError(null)}
-            >
+            <form className="login__form" onSubmit={handleLogin} onChange={() => setError(null)}>
                 <TextInput
                     type="email"
                     placeholder="Email"
@@ -97,6 +91,11 @@ const Login: React.FC = () => {
                     Регистрация
                 </Link>
             </p>
+            <div className="test-account" style={{ fontSize: 15, marginTop: 13, textAlign: "left" }}>
+                <p style={{ marginBottom: 6 }}>Test account</p>
+                <p>Login: admin@mail.com</p>
+                <p>Password: admin</p>
+            </div>
         </div>
     );
 };
