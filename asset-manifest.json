@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/property-shop/static/css/main.bd605c2c.css",
-    "main.js": "/property-shop/static/js/main.91268a07.js",
+    "main.js": "/property-shop/static/js/main.490847c6.js",
     "Product.css": "/property-shop/static/css/Product.de66454b.chunk.css",
     "Product.js": "/property-shop/static/js/Product.bb297472.chunk.js",
     "Favourites.css": "/property-shop/static/css/Favourites.ea0280b9.chunk.css",
@@ -16,7 +16,7 @@
     "static/media/error-icon.png": "/property-shop/static/media/error-icon.364b162caec281884a45.png",
     "index.html": "/property-shop/index.html",
     "main.bd605c2c.css.map": "/property-shop/static/css/main.bd605c2c.css.map",
-    "main.91268a07.js.map": "/property-shop/static/js/main.91268a07.js.map",
+    "main.490847c6.js.map": "/property-shop/static/js/main.490847c6.js.map",
     "Product.de66454b.chunk.css.map": "/property-shop/static/css/Product.de66454b.chunk.css.map",
     "Product.bb297472.chunk.js.map": "/property-shop/static/js/Product.bb297472.chunk.js.map",
     "Favourites.ea0280b9.chunk.css.map": "/property-shop/static/css/Favourites.ea0280b9.chunk.css.map",
@@ -31,6 +31,6 @@
   },
   "entrypoints": [
     "static/css/main.bd605c2c.css",
-    "static/js/main.91268a07.js"
+    "static/js/main.490847c6.js"
   ]
 }
