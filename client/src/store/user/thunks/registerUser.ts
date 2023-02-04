@@ -2,6 +2,7 @@ import { createAppAsyncThunk } from "../../createAppAsyncThunk";
 import axios from "axios";
 import { api } from "../../../api";
 import { IUser } from "../../../models/user";
+import { ERROR_MESSAGES } from "../../../constants/errorMessages";
 
 type RegisterParams = {
     email: string;
@@ -26,7 +27,7 @@ export const registerUser = createAppAsyncThunk<RegisterResponse, RegisterParams
                     return rejectWithValue({ message: 'Пользователь с таким Email уже существует' });
                 }
             }
-            return rejectWithValue({ message: 'Возникла техническая ошибка' });
+            return rejectWithValue({ message: ERROR_MESSAGES.TECHNICAL_ISSUE });
         }
     }
 )

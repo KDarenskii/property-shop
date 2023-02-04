@@ -1,15 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import './styles.scss';
+import "./styles.scss";
 
 type FormErrorMessageProps = {
     text: string;
-}
+};
 
 const FormErrorMessage: React.FC<FormErrorMessageProps> = ({ text }) => {
-    return (
-        <p className='form-error-message'>{text}</p>
-    )
-}
+    return <p className="form-error-message">{text}</p>;
+};
 
-export default FormErrorMessage
+export default FormErrorMessage;

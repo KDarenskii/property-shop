@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../models/products";
 import formatNumber from "../../utils/formatNumber";
-import ProductsLikeButton from "../Products/ProductsLikeButton";
+import ProductsFavButton from "../Products/ProductsFavButton";
 
 import "./styles.scss";
 
@@ -11,7 +11,7 @@ const ProductPanel: React.FC<IProduct> = (product) => {
     const { id, complex_name, building, price_total, square, rooms, floor, price_sq_m, scu } = product;
 
     return (
-        <Link to={`/product/${id}`} className="panel">
+        <Link to={`/property-shop/product/${id}`} className="panel">
             <div className="panel__artikul">{scu}</div>
             <div className="panel__name">
                 <div>ЖК {complex_name}</div>
@@ -27,7 +27,7 @@ const ProductPanel: React.FC<IProduct> = (product) => {
                 {formatNumber(Number(price_total))} ₽
             </div>
             <div className="panel__favourite">
-            <ProductsLikeButton {...product} />
+            <ProductsFavButton product={product} visualType='icon' />
             </div>
         </Link>
     );

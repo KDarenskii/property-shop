@@ -1,0 +1,34 @@
+@import "../../../assets/styles/vars.scss";
+
+.bid-info-raw {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: $mobileMiddle) {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    // .bid-info-raw__name
+    &__name {
+        max-width: 200px;
+        width: 100%;
+        font-weight: 700;
+        @media (max-width: $mobileMiddle) {
+            font-size: 20px;
+            margin-bottom: 5px;
+            &.label {
+                font-size: 20px;
+            }
+        }
+    }
+    // .bid-info-raw__value
+    &__value {
+        max-width: 100%;
+        width: 100%;
+        overflow-x: auto;
+        @media (max-width: $mobileMiddle) {
+            font-size: 20px;
+        }
+    }
+}

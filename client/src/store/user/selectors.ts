@@ -1,6 +1,6 @@
-import { RooteState } from "..";
+import { RootState } from "..";
 
-export const selectUser = (state: RooteState) => ({
+export const selectUser = (state: RootState) => ({
     user: state.user.user,
     isAuth: state.user.isAuth,
 });

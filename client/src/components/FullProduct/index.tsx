@@ -8,17 +8,20 @@ import { IProduct } from "../../models/products";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { fetchProductById } from "../../store/products/thunks/fetchProductById";
 import Alert from "../Alert";
-import { ALERT_TYPES } from "../../constants/alertTypes";
-import ProductFavouriteButton from "./ProductFavouriteButton";
+import { ALERT } from "../../constants/alertTypes";
 import PreviewButton from "../Buttons/PreviewButton";
 import OrderButton from "../Buttons/OrderButton";
 import BackButton from "../Buttons/BackButton";
 import ImageWithLoader from "../ImageWithLoader";
+import ProductsFavButton from "../Products/ProductsFavButton";
+import ProductParams from "../ProductParams";
+import ProductParamsItem from "../ProductParams/ProductParamsItem";
+import ProductDetails from "../ProductDetails";
+import ProductDetailsItem from "../ProductDetails/ProductDetailsItem";
 
 import "./styles.scss";
 
 const SingleProduct: React.FC = () => {
-    
     const { id = "" } = useParams();
 
     const dispatch = useAppDispatch();
@@ -27,7 +30,7 @@ const SingleProduct: React.FC = () => {
     const [isBooking, setIsBooking] = React.useState<boolean>(false);
     const [isViewing, setIsViewing] = React.useState<boolean>(false);
 
-    const [product, setProduct] = React.useState<IProduct | null>(null);
+    const [product, setProduct] = React.useState<IProduct>({} as IProduct);
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<string | null>(null);
 
@@ -35,13 +38,14 @@ const SingleProduct: React.FC = () => {
         setIsLoading(true);
         setError(null);
 
-        dispatch(fetchProductById(id)).unwrap()
+        dispatch(fetchProductById(id))
+            .unwrap()
             .then((data) => {
                 setProduct(data);
                 setError(null);
             })
             .catch((error) => {
-                setProduct(null);
+                setProduct({} as IProduct);
                 setError(error.message);
             })
             .finally(() => setIsLoading(false));
@@ -51,119 +55,92 @@ const SingleProduct: React.FC = () => {
 
     return (
         <section className="full-product">
-            {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+            {error && <Alert type={ALERT.ERROR} message={error} />}
             {!error && (
                 <div className="full-product__body">
                     <div className="full-product__content">
                         {isBooking && <Booking />}
                         {isViewing && <Viewing />}
                         {!isBooking && !isViewing && (
-                            <ImageWithLoader 
-                                src={`/img/products/${product?.image}`}
+                            <ImageWithLoader
+                                src={`/property-shop/img/products/${product.image}`}
                                 imageClassName="full-product__img"
                                 imageWrapperClassname="full-product__photo-wrapper"
-                                alt='Product'
+                                alt="Product"
                                 size={25}
                             />
                         )}
                     </div>
 
                     <div className="full-product__desc">
-                        <div className="full-product__desc-sector">
-                            ЖК {product?.complex_name}
-                        </div>
+                        <div className="full-product__desc-sector">ЖК {product.complex_name}</div>
 
                         <div className="full-product__desc-name">
                             <h5 className="full-product__desc-title">
-                                {product?.title}, {product?.square} м2
+                                {product.title}, {product.square} м2
                             </h5>
-                            <div className="full-product__desc-art">
-                                {product?.scu}
-                            </div>
-                            {product && <ProductFavouriteButton {...product} />}
+                            <div className="full-product__desc-art">{product.scu}</div>
+                            {product && <ProductsFavButton product={product} visualType="button" />}
                         </div>
 
                         <div className="full-product__desc-details">
-                            <div className="params">
-                                <div className="params__item">
-                                    <div className="params__definition full-product__params-definition">
-                                        Корпус
-                                    </div>
-                                    <div className="params__value full-product__params-value">
-                                        {product?.building}
-                                    </div>
-                                </div>
-                                <div className="params__item">
-                                    <div className="params__definition full-product__params-definition">
-                                        Этаж
-                                    </div>
-                                    <div className="params__value full-product__params-value">
-                                        {product?.floor}
-                                    </div>
-                                </div>
-                                <div className="params__item">
-                                    <div className="params__definition full-product__params-definition">
-                                        Номер
-                                    </div>
-                                    <div className="params__value full-product__params-value">
-                                        {product?.flat_number}
-                                    </div>
-                                </div>
-                                <div className="params__item">
-                                    <div className="params__definition full-product__params-definition">
-                                        Комнат
-                                    </div>
-                                    <div className="params__value full-product__params-value">
-                                        {product?.rooms}
-                                    </div>
-                                </div>
-                            </div>
+                            <ProductParams>
+                                <ProductParamsItem definition="Корпус" value={product.building} />
+                                <ProductParamsItem definition="Этаж" value={product.floor} />
+                                <ProductParamsItem definition="Номер" value={product.flat_number} />
+                                <ProductParamsItem definition="Комнат" value={product.rooms} />
+                            </ProductParams>
                         </div>
 
-                        <div className="full-product__details details">
+                        {/* <div className="full-product__details details">
                             <div className="details__row">
                                 <div className="details__name">Стоимость</div>
                                 <div className="details__value details__value--price">
-                                    {formatNumber(Number(product?.price_total))}{" "}
-                                    ₽
+                                    {formatNumber(Number(product.price_total))} ₽
                                 </div>
                             </div>
                             <div className="details__row">
                                 <div className="details__name">Цена за м2</div>
-                                <div className="details__value">
-                                    {formatNumber(Number(product?.price_sq_m))}{" "}
-                                    ₽/м2
-                                </div>
+                                <div className="details__value">{formatNumber(Number(product.price_sq_m))} ₽/м2</div>
                             </div>
                             <div className="details__row">
                                 <div className="details__name">Площадь</div>
-                                <div className="details__value">
-                                    {product?.square} м2
-                                </div>
+                                <div className="details__value">{product.square} м2</div>
                             </div>
-                        </div>
+                        </div> */}
+                        <ProductDetails className="full-product__details">
+                            <ProductDetailsItem
+                                name="Стоимость"
+                                value={`${formatNumber(Number(product.price_total))} ₽`}
+                                valueClassName="full-product__details-price"
+                            />
+                            <ProductDetailsItem
+                                name="Цена за м2"
+                                value={`${formatNumber(Number(product.price_sq_m))} ₽/м2`}
+                            />
+                            <ProductDetailsItem name="Площадь" value={`${product.square} м2`} />
+                        </ProductDetails>
 
                         {isBooking || isViewing ? (
                             <PreviewButton
-                                text={'Обратно к просмотру'}
+                                text={"Обратно к просмотру"}
                                 onClick={() => {
                                     setIsBooking(false);
                                     setIsViewing(false);
                                 }}
-                                className={'full-product__preview-btn'}
+                                className={"full-product__preview-btn"}
                                 hasIcon={true}
-                            >
-                            </PreviewButton>
+                            ></PreviewButton>
                         ) : (
                             <div className="full-product__actions">
-                                <OrderButton 
-                                    text={'Забронировать'} 
-                                    className={'full-product__order-btn'} 
-                                    onClick={() => setIsBooking(true)} 
+                                <OrderButton
+                                    text={"Забронировать"}
+                                    className={"full-product__order-btn"}
+                                    onClick={() => setIsBooking(true)}
                                 />
-                                <PreviewButton 
-                                    text={'Записаться на просмотр'} 
-                                    className={'full-product__preview-btn'} 
+                                <PreviewButton
+                                    text={"Записаться на просмотр"}
+                                    className={"full-product__preview-btn"}
                                     onClick={() => setIsViewing(true)}
                                 />
                             </div>
@@ -171,9 +148,9 @@ const SingleProduct: React.FC = () => {
                     </div>
                 </div>
             )}
-            <BackButton 
-                text={'← Вернуться к результатам поиска'}
-                className='full-product__back-btn'
+            <BackButton
+                text={"← Вернуться к результатам поиска"}
+                className="full-product__back-btn"
                 onClick={() => navigate(-1)}
             />
         </section>

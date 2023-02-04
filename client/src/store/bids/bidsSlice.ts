@@ -42,7 +42,7 @@ const bidsSlice = createSlice({
                 if (action.payload) {
                     state.error = action.payload.message;
                 } else {
-                    state.error = action.error.message ?? 'Возникла техническая ошибка';
+                    state.error = action.error.message ?? null;
                 }
             })
             .addCase(postBid.fulfilled, (state, action) => {

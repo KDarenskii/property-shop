@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { LOGIN_ROUTE, SIGN_UP_ROUTE } from '../../constants/routesPathNames';
+import { HOME_ROUTE, LOGIN_ROUTE, SIGN_UP_ROUTE } from '../../constants/routesPathNames';
 
 import './styles.scss';
 
@@ -15,7 +15,7 @@ const PageLogo: React.FC = () => {
         <>
             {!isAuthPage && (
                 <div className="logo-wrapper">
-                    <Link to="/" className="logo">
+                    <Link to={HOME_ROUTE} className="logo">
                         <div className="logo__title">КВАДРАТНЫЙ МЕТР</div>
                         <div className="logo__subtitle">
                             купить квартиру в один клик

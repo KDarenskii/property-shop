@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HOME_ROUTE, SIGN_UP_ROUTE } from "../../constants/routesPathNames";
-import { NOTION_TYPES } from "../../constants/notionTypes";
+import { NOTION } from "../../constants/notion";
 import { showNotion } from "../../utils/showNotion";
-import { ALERT_TYPES } from "../../constants/alertTypes";
+import { ALERT } from "../../constants/alertTypes";
 import Alert from "../Alert";
 import TextInput from "../FormElements/TextInput";
 import OrderButton from "../Buttons/OrderButton";
@@ -15,7 +15,6 @@ import { fetchFavourites } from "../../store/favourites/thunks/fetchFavourites";
 import "./styles.scss";
 
 const Login: React.FC = () => {
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -37,17 +36,19 @@ const Login: React.FC = () => {
             return;
         }
         if (password.length < 4) {
-            setError('Слишком короткий пароль');
+            setError("Слишком короткий пароль");
             setIsSubmiting(false);
             return;
         }
 
         try {
-            const response = await dispatch(loginUser({ email, password })).unwrap();
+            const response = await dispatch(
+                loginUser({ email, password })
+            ).unwrap();
             dispatch(setUser(response.user));
-            localStorage.setItem('token', response.accessToken);
+            localStorage.setItem("token", response.accessToken);
             dispatch(fetchFavourites());
-            showNotion(NOTION_TYPES.SUCCESS, "Вы вошли в аккаунт");
+            showNotion(NOTION.SUCCESS, "Вы вошли в аккаунт");
             navigate(from, { replace: true });
         } catch (error) {
             const err = error as any;
@@ -60,7 +61,7 @@ const Login: React.FC = () => {
     return (
         <div className="login">
             <h3 className="login__title">Вход</h3>
-            {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+            {error && <Alert type={ALERT.ERROR} message={error} />}
             <form
                 className="login__form"
                 onSubmit={handleLogin}
@@ -82,12 +83,12 @@ const Login: React.FC = () => {
                     onChange={(event) => setPassword(event.target.value)}
                     disabled={isSubmiting}
                 />
-                <OrderButton 
-                    className={'login__btn'} 
-                    type={'submit'} 
-                    text={'Войти'} 
-                    disabled={isSubmiting} 
-                    size={'small'}
+                <OrderButton
+                    className={"login__btn"}
+                    type={"submit"}
+                    text={"Войти"}
+                    disabled={isSubmiting}
+                    size={"small"}
                 />
             </form>
             <p className="login__text">

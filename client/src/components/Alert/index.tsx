@@ -1,17 +1,15 @@
-import React from 'react'
-import { TAlert } from '../../constants/alertTypes';
+import React from "react";
+import { ALERT } from "../../constants/alertTypes";
 
-import './styles.scss';
+import "./styles.scss";
 
 type AlertProps = {
     message: string;
-    type: TAlert;
-}
+    type: ALERT;
+};
 
 const Alert: React.FC<AlertProps> = ({ type, message }) => {
-    return (
-        <div className={`alert alert--${type}`}>{message}</div>
-    )
-}
+    return <div className={`alert alert--${type}`}>{message}</div>;
+};
 
-export default Alert
+export default Alert;

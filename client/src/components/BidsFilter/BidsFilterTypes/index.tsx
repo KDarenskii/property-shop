@@ -11,27 +11,22 @@ const BidsTypes: React.FC = () => {
     const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
 
-        if (value === 'Все') searchParams.delete('type');
+        if (value === 'ALL') searchParams.delete('type');
         else searchParams.set('type', value);
         searchParams.delete('_page');
         setSearchParams(searchParams);
     }
 
-    const options = (
-        <>
-            <option value="Все">Все заявки</option>
-            <option value="Бронирование">Бронирование</option>
-            <option value="Просмотр">Просмотр</option>
-        </>
-    )
-
     return (
         <Select
             onChange={handleTypeChange} 
             className={'bids-filter-select'}
-            defaultValue={searchParams.has('type') ? searchParams.get('type') as string : 'Все'}
-            children={options}
-        />
+            defaultValue={searchParams.has('type') ? searchParams.get('type') as string : 'ALL'}
+        >
+            <option value="ALL">Все заявки</option>
+            <option value="BOOKING">Бронирование</option>
+            <option value="VIEWING">Просмотр</option>
+        </Select>
     )
 }
 

@@ -38,7 +38,7 @@ const favouriteSlice = createSlice({
                 if (action.payload) {
                     state.error = action.payload.message;
                 } else {
-                    state.error = action.error.message ?? 'Возникла техническая ошибка';
+                    state.error = action.error.message ?? null;
                 }
             })
             .addCase(postFavourite.fulfilled, (state, action) => {

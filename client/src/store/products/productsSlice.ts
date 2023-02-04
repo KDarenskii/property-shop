@@ -67,7 +67,7 @@ const productSlice = createSlice({
                 if (action.payload) {
                     state.productsItems.error = action.payload.message;
                 } else {
-                    state.productsItems.error = action.error.message ?? 'Возникла техническая ошибка';
+                    state.productsItems.error = action.error.message ?? null;
                 }
             })
     }

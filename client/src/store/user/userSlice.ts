@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Roles } from "../../constants/Roles";
+import { ROLES } from "../../constants/roles";
 import { IUser } from "../../models/user";
 
 type TInitialState = {
-    user: IUser,
+    user: IUser;
     isAuth: boolean;
-}
+};
 
 const initialState: TInitialState = {
     user: {
         email: null,
         id: null,
-        roles: [Roles.User, Roles.Admin]
+        roles: [ROLES.USER, ROLES.ADMIN],
     },
     isAuth: false,
-}
+};
 
 const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<IUser>) {
@@ -30,9 +30,9 @@ const userSlice = createSlice({
         logoutUser(state) {
             state.user = {} as IUser;
             state.isAuth = false;
-        }
-    }
-})
+        },
+    },
+});
 
 export const { setUser, setIsAuth, logoutUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -8,16 +8,14 @@ import Rooms from "./Rooms";
 import Square from "./Square";
 import Prices from "./Prices";
 import Alert from "../Alert";
-import ClipLoader from "react-spinners/ClipLoader";
-import { ALERT_TYPES } from "../../constants/alertTypes";
-import Collapsible from 'react-collapsible';
+import { ALERT } from "../../constants/alertTypes";
+import Collapsible from "react-collapsible";
 import FilterResetButton from "./FilterResetButton";
 import CircleLoader from "../CircleLoader";
 
 import "./styles.scss";
 
 const Filter: React.FC = React.memo(() => {
-
     const productsInfo = useAppSelector(selectProductsInfo);
     const dispatch = useAppDispatch();
 
@@ -35,23 +33,23 @@ const Filter: React.FC = React.memo(() => {
     return (
         <section className="filter">
             <h3 className="visually-hidden">Фильтр</h3>
-            {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+            {error && <Alert type={ALERT.ERROR} message={error} />}
             {isLoading && (
                 <div className="filter__loader-wrapper">
                     <CircleLoader />
                 </div>
             )}
             {!error && !isLoading && (
-                <Collapsible 
+                <Collapsible
                     trigger="Фильтр"
                     open={true}
                     transitionTime={200}
-                    easing={'ease-in-out'}
-                    classParentString={'collabsible-filter'}
+                    easing={"ease-in-out"}
+                    classParentString={"collabsible-filter"}
                 >
                     <div className="filter__wrapper">
                         <div className="filter__controls">
-                            <Complexes complexNames={productsInfo.complexNames}/>
+                            <Complexes complexNames={productsInfo.complexNames} />
                             <Rooms rooms={productsInfo.roomValues} />
                             <Square squareMin={productsInfo.squareMin} squareMax={productsInfo.squareMax} />
                             <Prices priceMin={productsInfo.priceMin} priceMax={productsInfo.priceMax} />

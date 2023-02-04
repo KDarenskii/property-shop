@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 .card {
     max-width: 360px;
@@ -12,7 +12,7 @@
         border-radius: 8px;
         background-color: #ffffff;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-        @media (min-width: $pc){
+        @media (min-width: $pc) {
             &:hover {
                 cursor: pointer;
                 transform: translateY(-10px);

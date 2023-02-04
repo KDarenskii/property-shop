@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { NOTION_TYPES } from "../../../constants/notionTypes";
+import { NOTION } from "../../../constants/notion";
 import { LOGIN_ROUTE, SIGN_UP_ROUTE } from "../../../constants/routesPathNames";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useUser } from "../../../hooks/useUser";
 import { logoutUser } from "../../../store/user/userSlice";
 import { showNotion } from "../../../utils/showNotion";
-import cn from 'classnames';
+import cn from "classnames";
 
 import "./styles.scss";
 
@@ -16,21 +16,20 @@ type AuthButtonProps = {
 };
 
 const AuthButton: React.FC<AuthButtonProps> = ({ setIsActive, className }) => {
-
     const location = useLocation();
 
     const isAuthPage =
         location.pathname === LOGIN_ROUTE ||
         location.pathname === SIGN_UP_ROUTE;
-        
+
     const dispatch = useAppDispatch();
 
     const handleLogout = () => {
         dispatch(logoutUser());
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
         setIsActive(false);
-        showNotion(NOTION_TYPES.SUCCESS, 'Вы вышли из аккаунта');
-    }
+        showNotion(NOTION.SUCCESS, "Вы вышли из аккаунта");
+    };
 
     const { isAuth } = useUser();
 
@@ -41,15 +40,15 @@ const AuthButton: React.FC<AuthButtonProps> = ({ setIsActive, className }) => {
                     {isAuth ? (
                         <span
                             onClick={handleLogout}
-                            className={cn('auth-link', className)}
+                            className={cn("auth-link", className)}
                         >
                             <i className="fas fa-sign-out-alt auth-link__icon"></i>{" "}
                             Выйти
                         </span>
                     ) : (
-                        <Link 
-                            to={LOGIN_ROUTE} 
-                            className={cn('auth-link', className)}
+                        <Link
+                            to={LOGIN_ROUTE}
+                            className={cn("auth-link", className)}
                             onClick={() => setIsActive(false)}
                         >
                             <i className="fas fa-user auth-link__icon"></i> Вход

@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 .favourites {
     margin-bottom: 40px;
@@ -7,6 +7,6 @@
         margin-bottom: 20px;
         @media (max-width: $pc) {
             text-align: center;
-        } 
+        }
     }
 }

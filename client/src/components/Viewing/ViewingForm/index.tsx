@@ -3,11 +3,11 @@ import { HTTP_STATUS } from "../../../constants/httpStatuses";
 import { IBid } from "../../../models/bid";
 import { Formik } from "formik";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
-import { BID_STATUSES } from "../../../constants/bidStatuses";
-import { BID_TYPES } from "../../../constants/bidTypes";
+import { BID_STATUSE } from "../../../constants/bidStatuse";
+import { BID_TYPE } from "../../../constants/bidType";
 import { postBid } from "../../../store/bids/thunks/postBid";
 import { ViewingResult } from "..";
-import { viewingScheme } from './viewingScheme';
+import { viewingScheme } from "./viewingScheme";
 import TextInput from "../../FormElements/TextInput";
 import OrderButton from "../../Buttons/OrderButton";
 
@@ -36,30 +36,32 @@ const ViewingForm: React.FC<ViewingFormProps> = ({ setResult }) => {
         email: "",
     };
 
+    const handleSubmit = async (values: Values) => {
+
+        const bid: IBid = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phone: values.phone,
+            email: values.email,
+            status: BID_STATUSE.NEW,
+            type: BID_TYPE.VIEWING,
+            date: new Date().toISOString(),
+        };
+
+        try {
+            const response = await dispatch(postBid(bid)).unwrap();
+            setResult({ status: HTTP_STATUS.RESOLVED, message: response.message });
+        } catch (error) {
+            const err = error as any;
+            setResult({ status: HTTP_STATUS.REJECTED, message: err?.message });
+        }
+    }
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={viewingScheme}
-            onSubmit={async (values) => {
-
-                const bid: IBid = {
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    phone: values.phone,
-                    email: values.email,
-                    status: BID_STATUSES.NEW,
-                    type: BID_TYPES.VIEWING,
-                    date: new Date().toISOString(),
-                };
-
-                try {
-                    const response = await dispatch(postBid(bid)).unwrap();
-                    setResult({ status: HTTP_STATUS.RESOLVED, message: response.message })
-                } catch (error) {
-                    const err = error as any;
-                    setResult({ status: HTTP_STATUS.REJECTED, message: err?.message })
-                }
-            }}
+            onSubmit={handleSubmit}
         >
             {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
                 <form onSubmit={handleSubmit} className="viewing-form">
@@ -123,13 +125,13 @@ const ViewingForm: React.FC<ViewingFormProps> = ({ setResult }) => {
                             {errors.email && touched.email && <FormErrorMessage text={errors.email} />}
                         </label>
                     </div>
-                    <OrderButton 
-                        size={'small'}
+                    <OrderButton
+                        size={"small"}
                         type="submit"
                         className="viewing-form__btn"
                         disabled={isSubmitting}
-                        text={'Отправить'}
-                     />
+                        text={"Отправить"}
+                    />
                 </form>
             )}
         </Formik>

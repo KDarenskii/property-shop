@@ -1,8 +1,8 @@
 import React from "react";
 import { HTTP_STATUS } from "../../../constants/httpStatuses";
 import { Formik } from "formik";
-import { BID_STATUSES } from "../../../constants/bidStatuses";
-import { BID_TYPES } from "../../../constants/bidTypes";
+import { BID_STATUSE } from "../../../constants/bidStatuse";
+import { BID_TYPE } from "../../../constants/bidType";
 import { IBookingBid } from "../../../models/bid";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { postBid } from "../../../store/bids/thunks/postBid";
@@ -30,7 +30,6 @@ interface Values {
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
-    
     const dispatch = useAppDispatch();
 
     const initialState: Values = {
@@ -43,33 +42,34 @@ const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
         agreement: false,
     };
 
+    const handleSubmit = async (values: Values) => {
+        
+        const bid: IBookingBid = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            birthdate: values.birthdate,
+            phone: values.phone,
+            email: values.email,
+            comment: values.comment,
+            status: BID_STATUSE.NEW,
+            type: BID_TYPE.BOOKING,
+            date: new Date().toISOString(),
+        };
+
+        try {
+            const response = await dispatch(postBid(bid)).unwrap();
+            setResult({ status: HTTP_STATUS.RESOLVED, message: response.message });
+        } catch (error) {
+            const err = error as any;
+            setResult({ status: HTTP_STATUS.REJECTED, message: err?.message });
+        }
+    }
+
     return (
         <Formik
             initialValues={initialState}
             validationSchema={bookingScheme}
-            onSubmit={async (values) => {
-
-                const bid: IBookingBid = {
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    birthdate: values.birthdate,
-                    phone: values.phone,
-                    email: values.email,
-                    comment: values.comment,
-                    status: BID_STATUSES.NEW,
-                    type: BID_TYPES.BOOKING,
-                    date: new Date().toISOString(),
-                };
-
-                try {
-                    const response = await dispatch(postBid(bid)).unwrap();
-                    setResult({ status: HTTP_STATUS.RESOLVED, message: response.message })
-                } catch (error) {
-                    const err = error as any;
-                    setResult({ status: HTTP_STATUS.REJECTED, message: err?.message })
-                }
-
-            }}
+            onSubmit={handleSubmit}
         >
             {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
                 <form onSubmit={handleSubmit} className="booking-form">
@@ -116,7 +116,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
                                 value={values.phone}
                                 disabled={isSubmitting}
                             />
-                            {errors.phone && touched.phone && <FormErrorMessage text={errors.phone} />}
+                            {errors.phone && touched.phone && (
+                                <FormErrorMessage text={errors.phone} />
+                            )}
                         </label>
                         <label className="booking-form__label">
                             Email*
@@ -130,7 +132,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
                                 value={values.email}
                                 disabled={isSubmitting}
                             />
-                            {errors.email && touched.email && <FormErrorMessage text={errors.email} />}
+                            {errors.email && touched.email && (
+                                <FormErrorMessage text={errors.email} />
+                            )}
                         </label>
                     </div>
                     <label className="booking-form__label booking-form__label--thin">
@@ -144,7 +148,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
                             value={values.birthdate}
                             disabled={isSubmitting}
                         />
-                        {errors.birthdate && touched.birthdate && <FormErrorMessage text={errors.birthdate} />}
+                        {errors.birthdate && touched.birthdate && (
+                            <FormErrorMessage text={errors.birthdate} />
+                        )}
                     </label>
                     <label className="booking-form__label label">
                         Комментарий
@@ -166,15 +172,20 @@ const BookingForm: React.FC<BookingFormProps> = ({ setResult }) => {
                             onBlur={handleBlur}
                             disabled={isSubmitting}
                         />
-                        <span className="booking-form__agreement-text">С политикой конфиденциальности ознакомлен и согласен.*</span>
-                        {errors.agreement && touched.agreement && <FormErrorMessage text={errors.agreement} />}
+                        <span className="booking-form__agreement-text">
+                            С политикой конфиденциальности ознакомлен и
+                            согласен.*
+                        </span>
+                        {errors.agreement && touched.agreement && (
+                            <FormErrorMessage text={errors.agreement} />
+                        )}
                     </label>
-                    <OrderButton 
-                        size={'small'} 
-                        text={'Отправить'} 
-                        className={'booking-form__btn'} 
-                        type={'submit'} 
-                        disabled={isSubmitting} 
+                    <OrderButton
+                        size={"small"}
+                        text={"Отправить"}
+                        className={"booking-form__btn"}
+                        type={"submit"}
+                        disabled={isSubmitting}
                     />
                 </form>
             )}

@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import '../../assets/styles/vars.scss';
 
 .bid {
     margin-bottom: 40px;
@@ -34,5 +34,10 @@
         @media (max-width: $mobileSmall) {
             align-self: flex-end;
         }
+    }
+    // .bid__content
+    &__content {
+        background-color: $white;
+        padding: 20px;
     }
 }

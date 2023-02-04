@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Alert from "../components/Alert";
 import FullBid from "../components/FullBid";
-import { ALERT_TYPES } from "../constants/alertTypes";
+import { ALERT } from "../constants/alertTypes";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { IBid, IBookingBid } from "../models/bid";
 import { fetchBidById } from "../store/bids/thunks/fetchBidById";
@@ -34,7 +34,7 @@ const BidPage: React.FC = () => {
 
     return (
         <>
-            {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+            {error && <Alert type={ALERT.ERROR} message={error} />}
             {isLoading && <BidLoader />}
             {!isLoading && bid && <FullBid {...bid} />}
         </>

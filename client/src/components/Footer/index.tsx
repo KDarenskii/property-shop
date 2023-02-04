@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
+import Container from "../Container";
 
-import './styles.scss';
+import "./styles.scss";
 
 const Footer: React.FC = () => {
     return (
         <footer className="footer">
-            <div className="container">
-                Купить квартиру - быстро и надежно.
-            </div>
+            <Container>Купить квартиру - быстро и надежно.</Container>
         </footer>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

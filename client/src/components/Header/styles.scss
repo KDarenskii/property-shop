@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 .header {
     background-color: $black;
@@ -16,7 +16,7 @@
         height: 100%;
         margin: 0 auto;
     }
-    // .header__logo-text 
+    // .header__logo-text
     &__logo-text {
         @media (max-width: $tablet) {
             display: none;

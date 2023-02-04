@@ -1,59 +1,33 @@
 import React from "react";
-import { BID_EDIT_ROUTE } from "../../../constants/routesPathNames";
-import { useParseISO } from "../../../hooks/useParseISO";
 import { IBid } from "../../../models/bid";
-import ActionButton from "../../Buttons/ActionButton";
-import DeleteBidButton from "../DeleteBidButton";
+import { BID_STATUS_VALUES } from "../../../constants/bidStatuse";
+import { BID_TYPE_VALUE } from "../../../constants/bidType";
+import { parseISO } from "../../../utils/parseISO";
+import BidInfoRaw from "../BidInfoRaw";
 
 import "./styles.scss";
 
 const ViewingBid: React.FC<IBid> = (bid) => {
-
-    const parsedDate = useParseISO(bid.date);
-
+    const parsedDate = parseISO(bid.date);
     return (
-        <article className="viewing-bid">
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">ID:</div>
-                <div className="viewing-bid__item-value">Заявка №{bid.id}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Дата создания:</div>
-                <div className="viewing-bid__item-value">{parsedDate.day} {parsedDate.time}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Услуга:</div>
-                <div className="viewing-bid__item-value">{bid.type}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Имя:</div>
-                <div className="viewing-bid__item-value">{bid.firstName}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Фамилия:</div>
-                <div className="viewing-bid__item-value">{bid.lastName}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Email:</div>
-                <div className="viewing-bid__item-value">{bid.email}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Телефон:</div>
-                <div className="viewing-bid__item-value">{bid.phone}</div>
-            </div>
-            <div className="viewing-bid__item">
-                <div className="viewing-bid__item-name">Статус заявки:</div>
-                <div className="viewing-bid__item-value">{bid.status}</div>
-            </div>
-            <div className="viewing-bid__actions">
-                <ActionButton
-                    color={"blue"}
-                    text={"Редактировать"}
-                    to={BID_EDIT_ROUTE}
-                />
-                <DeleteBidButton id={bid.id as string} />
-            </div>
-        </article>
+        <>
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"ID:"} rawValue={`Заявка №${bid.id}`} />
+            <BidInfoRaw
+                rawClassName="viewing-bid-raw"
+                rawName={"Дата создания:"}
+                rawValue={`${parsedDate.day} ${parsedDate.time}`}
+            />
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"Услуга:"} rawValue={BID_TYPE_VALUE[bid.type]} />
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"Имя:"} rawValue={bid.firstName} />
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"Фамилия:"} rawValue={bid.lastName} />
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"Email:"} rawValue={bid.email} />
+            <BidInfoRaw rawClassName="viewing-bid-raw" rawName={"Телефон:"} rawValue={bid.phone} />
+            <BidInfoRaw
+                rawClassName="viewing-bid-raw"
+                rawName={"Статус заявки:"}
+                rawValue={BID_STATUS_VALUES[bid.status]}
+            />
+        </>
     );
 };
 

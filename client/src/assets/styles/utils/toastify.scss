@@ -1,0 +1,10 @@
+@import "../vars.scss";
+
+.Toastify {
+    // .Toastify__toast-body
+    &__toast-body > div:last-child {
+        @media (max-width: $mobile) {
+            font-size: 14px;
+        }
+    }
+}

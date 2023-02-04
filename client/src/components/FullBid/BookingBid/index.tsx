@@ -1,67 +1,30 @@
 import React from "react";
 import { IBookingBid } from "../../../models/bid";
-import { BID_EDIT_ROUTE } from "../../../constants/routesPathNames";
-import { useParseISO } from "../../../hooks/useParseISO";
-import ActionButton from "../../Buttons/ActionButton";
-import DeleteBidButton from "../DeleteBidButton";
+import { BID_STATUS_VALUES } from "../../../constants/bidStatuse";
+import { BID_TYPE_VALUE } from "../../../constants/bidType";
+import { parseISO } from "../../../utils/parseISO";
+import BidInfoRaw from "../BidInfoRaw";
+import { formatDate } from "../../../utils/formatDate";
 
 import "./styles.scss";
 
 const BookingBid: React.FC<IBookingBid> = (bid) => {
-
-    const parsedDate = useParseISO(bid.date);
+    
+    const parsedDate = parseISO(bid.date);
 
     return (
-        <div className="booking-bid">
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">ID:</div>
-                <div className="booking-bid__item-value">Заявка №{bid.id}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Дата создания:</div>
-                <div className="booking-bid__item-value">{parsedDate.day} {parsedDate.time}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Услуга:</div>
-                <div className="booking-bid__item-value">{bid.type}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Имя:</div>
-                <div className="booking-bid__item-value">{bid.firstName}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Фамилия:</div>
-                <div className="booking-bid__item-value">{bid.lastName}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Email:</div>
-                <div className="booking-bid__item-value">{bid.email}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Телефон:</div>
-                <div className="booking-bid__item-value">{bid.phone}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Дата рождения:</div>
-                <div className="booking-bid__item-value">{bid.birthdate}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Статус заявки:</div>
-                <div className="booking-bid__item-value">{bid.status}</div>
-            </div>
-            <div className="booking-bid__item">
-                <div className="booking-bid__item-name">Сообщение:</div>
-                <div className="booking-bid__item-value">{bid.comment}</div>
-            </div>
-            <div className="booking-bid__actions">
-                <ActionButton
-                    color={"blue"}
-                    text={"Редактировать"}
-                    to={BID_EDIT_ROUTE}
-                />
-                <DeleteBidButton id={bid.id as string} />
-            </div>
-        </div>
+        <>
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"ID:"} rawValue={`Заявка №${bid.id}`} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Дата создания:"} rawValue={`${parsedDate.day} ${parsedDate.time}`} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Услуга:"} rawValue={BID_TYPE_VALUE[bid.type]} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Имя:"} rawValue={bid.firstName} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Фамилия:"} rawValue={bid.lastName} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Email:"} rawValue={bid.email} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Телефон:"} rawValue={bid.phone} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Дата рождения:"} rawValue={formatDate(bid.birthdate)} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Статус заявки:"} rawValue={BID_STATUS_VALUES[bid.status]} />
+            <BidInfoRaw rawClassName="booking-bid-raw" rawName={"Сообщение:"} rawValue={bid.comment} />
+        </>
     );
 };
 

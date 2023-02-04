@@ -1,0 +1,9 @@
+@import "../../assets/styles/vars.scss";
+
+.params {
+    display: flex;
+    gap: 24px;
+    @media (max-width: $mobileMiddle) {
+        gap: 21px;
+    }
+}

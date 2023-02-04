@@ -1,7 +1,7 @@
 import { createAppAsyncThunk } from "../../createAppAsyncThunk";
-import axios from "axios";
 import { authApi } from "../../../api";
 import { logoutUser } from "../../user/userSlice";
+import { handleAuthError } from "../../../utils/handleAuthError";
 
 type Response = {
     id: string;
@@ -14,11 +14,10 @@ export const deleteBid = createAppAsyncThunk<Response, string>(
         await authApi.delete<void>(`bids/${id}`);
         return { id, message: "Заявка удалена" };
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            if (error.response && error.response.status === 401) {
-                dispatch(logoutUser());
-                return rejectWithValue({ message: "Необходимо войти в аккаунт" });
-            }
+        const { isAuthError, message } = handleAuthError(error);
+        if (isAuthError){
+            dispatch(logoutUser());
+            return rejectWithValue({ message });
         }
         return rejectWithValue({ message: "Не удалось удалить заявку" });
     }

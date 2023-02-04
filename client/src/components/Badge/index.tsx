@@ -1,17 +1,15 @@
-import React from 'react';
-import { TBadge } from '../../constants/badgeTypes';
+import React from "react";
+import { BADGE } from "../../constants/badge";
 
-import './styles.scss';
+import "./styles.scss";
 
 type BadgeProps = {
-    type: TBadge;
+    type: BADGE;
     text: string;
-}
+};
 
 const Badge: React.FC<BadgeProps> = ({ type, text }) => {
-    return (
-        <span className={`badge badge--${type}`}>{text}</span>
-    )
-}
+    return <span className={`badge badge--${type}`}>{text}</span>;
+};
 
-export default Badge
+export default Badge;

@@ -2,6 +2,7 @@ import { createAppAsyncThunk } from "../../createAppAsyncThunk";
 import axios from "axios";
 import { api } from "../../../api";
 import { IUser } from "../../../models/user";
+import { ERROR_MESSAGES } from "../../../constants/errorMessages";
 
 type LoginUserParams = {
     email: string;
@@ -30,7 +31,7 @@ export const loginUser = createAppAsyncThunk<LoginUserResponse, LoginUserParams>
                     return rejectWithValue({ message:  apiErrors[error.response.data] });
                 }
             }
-            return rejectWithValue({ message: 'Возникла техническая ошибка' });
+            return rejectWithValue({ message: ERROR_MESSAGES.TECHNICAL_ISSUE });
         }
     }
 )

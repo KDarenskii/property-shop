@@ -1,4 +1,4 @@
-@import '../../../styles/vars.scss';
+@import "../../../assets/styles/vars.scss";
 
 .button-favourite {
     display: flex;
@@ -35,7 +35,7 @@
         font-size: 24px;
         transition: all 0.2s ease-in;
         &--active {
-            color: $white;   
+            color: $white;
         }
     }
     &--active {

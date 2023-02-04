@@ -12,15 +12,15 @@ const BidLayout: React.FC = () => {
                 <div className="bid__body">
                     <div className="bid__header">
                         <h4 className="bid__title">Данные о заявке</h4>
-                        <Link to={BIDS_ROUTE} className="bid__link">
-                            Все заявки
-                        </Link>
+                        <Link to={BIDS_ROUTE} className="bid__link">Все заявки</Link>
                     </div>
-                    <Outlet />
+                    <div className="bid__content">
+                        <Outlet />
+                    </div>
                 </div>
             </Container>
         </section>
-    );
+    )
 };
 
 export default BidLayout;

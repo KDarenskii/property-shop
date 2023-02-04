@@ -1,18 +1,22 @@
 import React from "react";
-import { TBidStatus } from "../../../constants/bidStatuses";
+import { BID_STATUSE } from "../../../constants/bidStatuse";
 import { IBid } from "../../../models/bid";
 import { Formik } from "formik";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useNavigate } from "react-router-dom";
 import { patchBid } from "../../../store/bids/thunks/patchBid";
 import { showNotion } from "../../../utils/showNotion";
-import { NOTION_TYPES } from "../../../constants/notionTypes";
-import { useParseISO } from "../../../hooks/useParseISO";
+import { NOTION } from "../../../constants/notion";
 import ActionButton from "../../Buttons/ActionButton";
-import { viewingEditScheme } from './viewingEditScheme';
+import { viewingEditScheme } from "./viewingEditScheme";
 import TextInput from "../../FormElements/TextInput";
 import Select from "../../FormElements/Select";
 import FormErrorMessage from "../../FormElements/FormErrorMessage";
+import { BID_TYPE_VALUE } from "../../../constants/bidType";
+import BidInfoRaw from "../../FullBid/BidInfoRaw";
+import { parseISO } from "../../../utils/parseISO";
+import BidFooter from "../../FullBid/BidFooter";
+import BidEditInputRaw from "../BidEditInputRaw";
 
 import "./styles.scss";
 
@@ -22,12 +26,11 @@ export interface EditViewingValues {
     lastName: string;
     email: string;
     phone: string;
-    status: TBidStatus;
+    status: BID_STATUSE;
 }
 
 const ViewingBidEditForm: React.FC<IBid> = (bid) => {
-
-    const parsedDate = useParseISO(bid.date);
+    const parsedDate = parseISO(bid.date);
 
     const initialState: EditViewingValues = {
         id: bid.id,
@@ -41,156 +44,143 @@ const ViewingBidEditForm: React.FC<IBid> = (bid) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    const handleSubmit = async (values: EditViewingValues) => {
+        try {
+            const response = await dispatch(patchBid(values)).unwrap();
+            showNotion(NOTION.SUCCESS, response.message);
+            navigate(-1);
+        } catch (error) {
+            const err = error as any;
+            showNotion(NOTION.ERROR, err.message);
+        }
+    };
+
     return (
-        <Formik
-            initialValues={initialState}
-            validationSchema={viewingEditScheme}
-            onSubmit={async (values) => {
-                try {
-                    const response = await dispatch(patchBid(values)).unwrap();
-                    showNotion(NOTION_TYPES.SUCCESS, response.message);
-                    navigate(-1);
-                } catch (error) {
-                    const err = error as any;
-                    showNotion(NOTION_TYPES.ERROR, err.message);
-                }
-            }}
-        >
+        <Formik initialValues={initialState} validationSchema={viewingEditScheme} onSubmit={handleSubmit}>
             {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
                 <form onSubmit={handleSubmit} className="bid-edit-viewing-form">
-                    <div className="bid-edit-viewing-form__item">
-                        <div className="bid-edit-viewing-form__item-name">ID:</div>
-                        <div className="bid-edit-viewing-form__item-value">Заявка №{bid.id}</div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <div className="bid-edit-viewing-form__item-name">Дата создания:</div>
-                        <div className="bid-edit-viewing-form__item-value">{parsedDate.day} {parsedDate.time}</div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <div className="bid-edit-viewing-form__item-name"> Услуга:</div>
-                        <div className="bid-edit-viewing-form__item-value">{bid.type}</div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <label
-                            className="bid-edit-viewing-form__item-name"
-                            htmlFor="bid-firstName"
+                    <BidInfoRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        rawName={"ID:"}
+                        rawValue={`Заявка №${bid.id}`}
+                    />
+                    <BidInfoRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        rawName={"Дата создания:"}
+                        rawValue={`${parsedDate.day} ${parsedDate.time}`}
+                    />
+                    <BidInfoRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        rawName={"Услуга:"}
+                        rawValue={BID_TYPE_VALUE[bid.type]}
+                    />
+
+                    <BidEditInputRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        labelText="Имя:"
+                        htmlFor="bid-firstName"
+                    >
+                        <TextInput
+                            className="bid-edit-viewing-form__input"
+                            id="bid-firstName"
+                            name="firstName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.firstName}
+                            disabled={isSubmitting}
+                            placeholder="Имя"
+                        />
+                        {errors.firstName && touched.firstName && <FormErrorMessage text={errors.firstName} />}
+                    </BidEditInputRaw>
+
+                    <BidEditInputRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        labelText="Фамилия:"
+                        htmlFor="bid-lastName"
+                    >
+                        <TextInput
+                            className="bid-edit-viewing-form__input"
+                            id="bid-lastName"
+                            name="lastName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.lastName}
+                            disabled={isSubmitting}
+                            placeholder="Фамилия"
+                        />
+                        {errors.lastName && touched.lastName && <FormErrorMessage text={errors.lastName} />}
+                    </BidEditInputRaw>
+
+                    <BidEditInputRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        labelText="Email:"
+                        htmlFor="bid-email"
+                    >
+                        <TextInput
+                            className="bid-edit-viewing-form__input"
+                            id="bid-email"
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            disabled={isSubmitting}
+                            placeholder="Email"
+                        />
+                        {errors.email && touched.email && <FormErrorMessage text={errors.email} />}
+                    </BidEditInputRaw>
+
+                    <BidEditInputRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        labelText="Телефон:"
+                        htmlFor="bid-phone"
+                    >
+                        <TextInput
+                            className="bid-edit-viewing-form__input"
+                            id="bid-phone"
+                            name="phone"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.phone}
+                            disabled={isSubmitting}
+                            placeholder="Телефон"
+                        />
+                        {errors.phone && touched.phone && <FormErrorMessage text={errors.phone} />}
+                    </BidEditInputRaw>
+
+                    <BidEditInputRaw
+                        rawClassName="bid-edit-viewing-form__input-raw"
+                        labelText="Статус заявки:"
+                        htmlFor="bid-phone"
+                    >
+                        <Select
+                            className="bid-edit-viewing-form__select"
+                            id="bid-status"
+                            name="status"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.status}
+                            disabled={isSubmitting}
                         >
-                            Имя:
-                        </label>
-                        <div className="bid-edit-viewing-form__input-wrapper">
-                            <TextInput
-                                className="bid-edit-viewing-form__input"
-                                id="bid-firstName"
-                                name="firstName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.firstName}
-                                disabled={isSubmitting}
-                                placeholder={'Имя'}
-                            />
-                            {errors.firstName && touched.firstName && <FormErrorMessage text={errors.firstName} />}
-                        </div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <label
-                            className="bid-edit-viewing-form__item-name"
-                            htmlFor="bid-lastName"
-                        >
-                            Фамилия:
-                        </label>
-                        <div className="bid-edit-viewing-form__input-wrapper">
-                            <TextInput
-                                className="bid-edit-viewing-form__input"
-                                id="bid-lastName"
-                                name="lastName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.lastName}
-                                disabled={isSubmitting}
-                                placeholder={'Фамилия'}
-                            />
-                            {errors.lastName && touched.lastName && <FormErrorMessage text={errors.lastName} />}
-                        </div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <label
-                            className="bid-edit-viewing-form__item-name"
-                            htmlFor="bid-email"
-                        >
-                            Email:
-                        </label>
-                        <div className="bid-edit-viewing-form__input-wrapper">
-                            <TextInput
-                                className="bid-edit-viewing-form__input"
-                                id="bid-email"
-                                name="email"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                disabled={isSubmitting}
-                                placeholder={'Email'}
-                            />
-                            {errors.email && touched.email && <FormErrorMessage text={errors.email} />}
-                        </div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <label
-                            className="bid-edit-viewing-form__item-name"
-                            htmlFor="bid-phone"
-                        >
-                            Телефон:
-                        </label>
-                        <div className="bid-edit-viewing-form__input-wrapper">
-                            <TextInput
-                                className="bid-edit-viewing-form__input"
-                                id="bid-phone"
-                                name="phone"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.phone}
-                                disabled={isSubmitting}
-                                placeholder={'Телефон'}
-                            />
-                            {errors.phone && touched.phone && <FormErrorMessage text={errors.phone} />}
-                        </div>
-                    </div>
-                    <div className="bid-edit-viewing-form__item">
-                        <label
-                            className="bid-edit-viewing-form__item-name"
-                            htmlFor="bid-status"
-                        >
-                            Статус заявки:
-                        </label>
-                        <div className="bid-edit-viewing-form__input-wrapper">
-                            <Select
-                                className="bid-edit-viewing-form__select"
-                                id="bid-status"
-                                name="status"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.status}
-                                disabled={isSubmitting}
-                            >
-                                <option value="Новая">Новая</option>
-                                <option value="В работе">В работе</option>
-                                <option value="Завершенная">Завершенная</option>
-                            </Select>
-                        </div>
-                    </div>
-                    <div className="bid-edit-viewing-form__actions">
+                            <option value="NEW">Новая</option>
+                            <option value="IN_WORK">В работе</option>
+                            <option value="COMPLETED">Завершенная</option>
+                        </Select>
+                    </BidEditInputRaw>
+
+                    <BidFooter>
                         <ActionButton
-                             color={'blue'} 
-                             text={'Сохранить изменения'} 
-                             type={'submit'} 
-                             disabled={isSubmitting}
+                            color={"blue"}
+                            text={"Сохранить изменения"}
+                            type={"submit"}
+                            disabled={isSubmitting}
                         />
-                        <ActionButton 
-                            color={'yellow'} 
-                            text={'Вернуться'}
-                            type={'button'} 
-                            onClick={() => navigate(-1)} 
+                        <ActionButton
+                            color={"yellow"}
+                            text={"Вернуться"}
+                            type={"button"}
+                            onClick={() => navigate(-1)}
                         />
-                    </div>
+                    </BidFooter>
                 </form>
             )}
         </Formik>

@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 .filter {
     margin-bottom: 30px;
@@ -39,7 +39,7 @@
             background-color: #f6f6f6;
         }
         &::after {
-            content: '';
+            content: "";
             display: block;
             width: 13px;
             height: 13px;

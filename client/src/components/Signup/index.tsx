@@ -2,21 +2,20 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HOME_ROUTE, LOGIN_ROUTE } from "../../constants/routesPathNames";
 import Alert from "../Alert";
-import { ALERT_TYPES } from "../../constants/alertTypes";
+import { ALERT } from "../../constants/alertTypes";
 import { showNotion } from "../../utils/showNotion";
-import { NOTION_TYPES } from "../../constants/notionTypes";
+import { NOTION } from "../../constants/notion";
 import TextInput from "../FormElements/TextInput";
 import OrderButton from "../Buttons/OrderButton";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { registerUser } from "../../store/user/thunks/registerUser";
-import { Roles } from "../../constants/Roles";
+import { ROLES } from "../../constants/roles";
 import { setUser } from "../../store/user/userSlice";
 import { fetchFavourites } from "../../store/favourites/thunks/fetchFavourites";
 
 import "./styles.scss";
 
 const Signup: React.FC = () => {
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -26,8 +25,9 @@ const Signup: React.FC = () => {
     const [isSubmiting, setIsSubmiting] = React.useState<boolean>(false);
     const [error, setError] = React.useState<string | null>(null);
 
-    const handleRegistration = async (event: React.FormEvent<HTMLFormElement>) => {
-
+    const handleRegistration = async (
+        event: React.FormEvent<HTMLFormElement>
+    ) => {
         event.preventDefault();
         setError(null);
         setIsSubmiting(true);
@@ -38,7 +38,7 @@ const Signup: React.FC = () => {
             return;
         }
         if (password.length < 4) {
-            setError('Слабый пароль');
+            setError("Слабый пароль");
             setIsSubmiting(false);
             return;
         }
@@ -48,11 +48,13 @@ const Signup: React.FC = () => {
         }
 
         try {
-            const response = await dispatch(registerUser({ email, password, roles: [Roles.User] })).unwrap();
+            const response = await dispatch(
+                registerUser({ email, password, roles: [ROLES.USER] })
+            ).unwrap();
             dispatch(setUser(response.user));
-            localStorage.setItem('token', response.accessToken);
+            localStorage.setItem("token", response.accessToken);
             dispatch(fetchFavourites());
-            showNotion(NOTION_TYPES.SUCCESS, "Аккаунт успешно создан");
+            showNotion(NOTION.SUCCESS, "Аккаунт успешно создан");
             navigate(HOME_ROUTE);
         } catch (error) {
             const err = error as any;
@@ -65,7 +67,7 @@ const Signup: React.FC = () => {
     return (
         <div className="signup">
             <h3 className="signup__title">Регистрация</h3>
-            {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+            {error && <Alert type={ALERT.ERROR} message={error} />}
             <form
                 className="signup__form"
                 onSubmit={handleRegistration}
@@ -95,12 +97,12 @@ const Signup: React.FC = () => {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     disabled={isSubmiting}
                 />
-                <OrderButton 
-                    className={'signup__btn'} 
-                    type={'submit'} 
-                    text={'Регистрация'} 
-                    disabled={isSubmiting} 
-                    size={'small'}
+                <OrderButton
+                    className={"signup__btn"}
+                    type={"submit"}
+                    text={"Регистрация"}
+                    disabled={isSubmiting}
+                    size={"small"}
                 />
             </form>
             <p className="signup__text">

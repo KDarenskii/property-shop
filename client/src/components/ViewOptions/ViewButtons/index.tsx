@@ -1,22 +1,21 @@
-import React from 'react'
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import { setListView } from '../../../store/products/productsSlice';
-import { selectListView } from '../../../store/products/selectors';
-import { useWindowSize } from 'usehooks-ts'
+import React from "react";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { setListView } from "../../../store/products/productsSlice";
+import { selectListView } from "../../../store/products/selectors";
+import { useSize } from "ahooks";
 
-import './styles.scss';
+import "./styles.scss";
 
 const ViewButtons: React.FC = () => {
-
     const dispatch = useAppDispatch();
     const activeView = useAppSelector(selectListView);
 
-    const { width } = useWindowSize();
+    const size = useSize(document.body);
 
     React.useEffect(() => {
-        if (width < 1170) dispatch(setListView('cards'));
-    }, [width, dispatch])
+        if (size && size.width < 1170) dispatch(setListView("cards"));
+    }, [size, dispatch]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setListView(event.currentTarget.value as "cards" | "panels"));
@@ -26,7 +25,7 @@ const ViewButtons: React.FC = () => {
 
     return (
         <div className="view-buttons">
-            <label className={`view-buttons__label ${activeView === 'cards' ? 'view-buttons__label--active' : ''}`}>
+            <label className={`view-buttons__label ${activeView === "cards" ? "view-buttons__label--active" : ""}`}>
                 <i className="fas fa-th-large"></i>
                 <input
                     type="radio"
@@ -37,7 +36,7 @@ const ViewButtons: React.FC = () => {
                     checked={activeView === "cards"}
                 />
             </label>
-            <label className={`view-buttons__label ${activeView === 'panels' ? 'view-buttons__label--active' : ''}`}>
+            <label className={`view-buttons__label ${activeView === "panels" ? "view-buttons__label--active" : ""}`}>
                 <i className="fas fa-bars"></i>
                 <input
                     type="radio"
@@ -50,6 +49,6 @@ const ViewButtons: React.FC = () => {
             </label>
         </div>
     );
-}
+};
 
 export default ViewButtons;

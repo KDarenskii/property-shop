@@ -1,4 +1,4 @@
-@import '../../styles/vars.scss';
+@import "../../assets/styles/vars.scss";
 
 .panels-filter {
     display: flex;
@@ -79,12 +79,12 @@
         &--asc::after {
             transform: translateY(-50%) rotate(180deg);
         }
-        &--no-hover{
+        &--no-hover {
             padding: 0;
             &::after {
                 display: none;
             }
-            &:hover{
+            &:hover {
                 color: #959595;
                 cursor: default;
                 opacity: 1;

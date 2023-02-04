@@ -1,40 +1,40 @@
 import { createAppAsyncThunk } from "../../createAppAsyncThunk";
 import { IProduct } from "../../../models/products";
-import axios from 'axios';
 import { api } from "../../../api";
+import { handleDefaultError } from "../../../utils/handleDefaultError";
 
 type FetchProductsParams = {
     limit?: number;
     query?: string;
-}
+};
 
 type ProductsResponse = {
     totalCount: string;
-    data: IProduct[]
-}
+    data: IProduct[];
+};
 
-export const fetchProducts = createAppAsyncThunk<ProductsResponse, FetchProductsParams>(
-    'products/fetchProducts',
-    async function({ query = '', limit = 10 }, { rejectWithValue }) {
+export const fetchProducts = createAppAsyncThunk<
+    ProductsResponse,
+    FetchProductsParams
+>(
+    "products/fetchProducts",
+    async function ({ query = "", limit = 10 }, { rejectWithValue }) {
         try {
-            const response = await api.get<IProduct[]>(`products?_limit=${limit}&` + query, {
-                params: {
-                    _limit: limit,
+            const response = await api.get<IProduct[]>(
+                `products?_limit=${limit}&` + query,
+                {
+                    params: {
+                        _limit: limit,
+                    },
                 }
-            });
-            return ({
+            );
+            return {
                 data: response.data,
-                totalCount: response.headers['x-total-count'] ?? '',
-            });
+                totalCount: response.headers["x-total-count"] ?? "",
+            };
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                if (error.response) {
-                    return rejectWithValue({ message: 'Не удалось получить данные с сервера' });
-                } else {
-                    return rejectWithValue({ message: 'Ошибка интернет соединения' })
-                }
-            }
-            return rejectWithValue({ message: 'Возникла техническая ошибка' })
+            const message = handleDefaultError(error);
+            return rejectWithValue({ message });
         }
     }
-)
+);

@@ -14,7 +14,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import {  selectListView, selectProducts } from "../../store/products/selectors";
 import { fetchProducts } from "../../store/products/thunks/fetchProducts";
 import { useSearchParams } from "react-router-dom";
-import { ALERT_TYPES } from "../../constants/alertTypes";
+import { ALERT } from "../../constants/alertTypes";
 import CardsWrapper from "../CardsWrapper";
 import MainTitle from "../MainTitle";
 
@@ -47,7 +47,7 @@ const Products: React.FC = () => {
                 <Filter />
                 <ViewOptions />
                 <div className="products__list">
-                    {error && <Alert type={ALERT_TYPES.ERROR} message={error} />}
+                    {error && <Alert type={ALERT.ERROR} message={error} />}
                     {!error && (
                         <>
                             {listView === "cards" 
@@ -71,7 +71,7 @@ const Products: React.FC = () => {
                 {!isLoading && (
                     <>
                         {totalPages > 1 && <Pagination limit={limit} totalPages={totalPages} />}
-                        {totalPages < 1 && !error && <Alert type={ALERT_TYPES.INFO} message={ "К сожалению, подходящих товаров нет в наличии." } />}
+                        {totalPages < 1 && !error && <Alert type={ALERT.INFO} message={ "К сожалению, подходящих товаров нет в наличии." } />}
                     </>
                 )}
             </div>

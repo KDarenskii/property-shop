@@ -1,12 +1,12 @@
 import React from "react";
-import { HTTP_STATUS, THtppStatus } from "../../constants/httpStatuses";
+import { HTTP_STATUS } from "../../constants/httpStatuses";
 import FormsResult from "../FormsResult.tsx";
 import ViewingForm from "./ViewingForm";
 
 import "./styles.scss";
 
 export type ViewingResult = {
-    status: THtppStatus;
+    status: HTTP_STATUS;
     message: string;
 };
 

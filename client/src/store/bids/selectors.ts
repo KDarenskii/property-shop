@@ -1,3 +1,3 @@
-import { RooteState } from "..";
+import { RootState } from "..";
 
-export const selectBids = (state: RooteState) => state.bids;
+export const selectBids = (state: RootState) => state.bids;
