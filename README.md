@@ -54,3 +54,14 @@
 -   [JSON Server Auth (репозиторий)](https://github.com/jeremyben/json-server-auth) - JWT authentication middleware for JSON Server
 
 Cервер размещен с помощью сервиса [Glitch](https://glitch.com/)
+
+## Demo
+![shop1](https://github.com/KDarenskii/property-shop/assets/111995279/6321be46-78f9-44f1-a4ed-3bf6175fa831)
+
+![shop2](https://github.com/KDarenskii/property-shop/assets/111995279/ec99e1f3-6b4f-400d-91fa-f420074f0b4e)
+
+![shop3](https://github.com/KDarenskii/property-shop/assets/111995279/45e90f2a-5470-4875-ab35-df3462df7a8b)
+
+![shop4](https://github.com/KDarenskii/property-shop/assets/111995279/183e4f3b-4a55-47fc-a054-8d7fe85253f9)
+
+![shop5](https://github.com/KDarenskii/property-shop/assets/111995279/bc6c1abe-6f53-468f-b3cb-f36b81da148e)
